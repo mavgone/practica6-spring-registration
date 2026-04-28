@@ -10,11 +10,18 @@
   <form action="#" th:action="@{/register}" th:object="${user}" method="post">
     
     <label>юр нейм</label>
-    <input type="text" th:field="*{name}" required />
+    <input type="text" th:field="*{username}" required />
+    <div th:if="${existsByUsername}" th:text="${existsByUsername}" class="error_messages"></div>
+    <br/>
+    <div th:errors="*{username}" class="error_messages"></div>
+
     <br/><br/>
     
     <label>меил:</label>
     <input type="email" th:field="*{mail}" required />
+    <div th:if="${existsByMailError}" th:text="${existsByMailError}" class="error_messages"></div>
+    <br/>
+    <div th:errors="*{mail}" class="error_messages"></div>
     <br/><br/>
     
     <label>када радился</label>
@@ -23,14 +30,18 @@
   
     <label>пасворд</label>
     <input type="password" th:field="*{password}" required />
+    <br/>
+    <div th:errors="*{password}" class="error_messages"></div>
     <br/><br/>
     
     <label>а ну ка еще раз введи</label>
     <input type="password" th:field="*{confirmPassword}" required />
+    <br/>
+    <div th:if="${notMatchPasswordError}" th:text="${notMatchPasswordError}" class="error_messages"></div>
     <br/><br/>
     
     <button type="submit">зарегаца</button>
-    
+
   </form>
 </body>
 </html>
