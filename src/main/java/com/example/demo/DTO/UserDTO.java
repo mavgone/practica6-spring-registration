@@ -1,21 +1,34 @@
 package com.example.demo.DTO;
 import java.time.LocalDate;
-
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+  
 public class UserDTO {
-    private String name;
+    
+    @NotBlank(message = "Имя пользователя содержит недопустимые символы")
+    @Size(min=6, max=20, message = "Имя пользователя должно содержать не менее 6 символов")
+    private String username;
+    
+    @NotBlank(message="Неверный email")
+    @Email    
     private String mail;
-    private LocalDate date;
+    
+    private LocalDate date; 
+    
+    @NotBlank(message="Пароль содержит недопустимые символы")
+    @Size(min=8, max=15, message="Пароль должен содержать не менее 8 символов")
     private String password;
     private String confirmPassword;
 
     public UserDTO() {}
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getMail() {
